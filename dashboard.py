@@ -51,10 +51,10 @@ selected_year = st.sidebar.selectbox('Pilih Tahun:', hours_df['year'].unique())
 filtered_data = filter_data_by_year(hours_df, selected_year)
 
 # Tambahkan bagian kode Anda di sini
-st.header("Tren penggunaan sepeda")
+st.header("Trene penggunaan sepeda")
 
 # Line chart for bike usage trend
-line_chart(filtered_data, 'month', 'count', f'Tren Penggunaan Sepeda Tahun {selected_year}', 'Bulan', 'Jumlah Sepeda')
+line_chart(filtered_data, 'month', 'count', f'Trene Penggunaan Sepeda Tahun {selected_year}', 'Bulan', 'Jumlah Sepeda')
 
 # Visualisasi Total Pengguna per Bulan
 hours_df['date'] = pd.to_datetime(hours_df['date'])
@@ -86,7 +86,7 @@ ax.set_title('Total Pengguna per Tahun')
 ax.legend()
 st.pyplot(fig)
 
-# Penjelasan untuk tabel tren penggunaan sepeda
+# Penjelasan untuk tabel tren penggunaan sepeda 
 if selected_year == 2011:
     st.write("Grafik menggambarkan fluktuasi bulanan dalam penggunaan sepeda selama tahun 2011 tanpa spesifikasi wilayah atau faktor yang mempengaruhi tren. Analisis menunjukkan adanya fluktuasi yang signifikan, dengan jumlah penggunaan sepeda tertinggi mencapai 580 pada bulan Oktober dan yang terendah adalah 100 pada bulan Februari, dengan rata-rata penggunaan sepeda per bulan sebesar 350. Tren penggunaan sepeda di wilayah tersebut terlihat tidak stabil, dan pertanyaan untuk diskusi mencakup faktor apa yang mungkin memengaruhi fluktuasi tersebut dan cara-cara untuk meningkatkan tren penggunaan sepeda di suatu wilayah. Tambahan informasi tentang sumber data atau lokasi pengumpulan data akan membantu memberikan analisis yang lebih komprehensif.")
 elif selected_year == 2012:
