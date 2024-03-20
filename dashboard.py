@@ -53,8 +53,6 @@ filtered_data = filter_data_by_year(hours_df, selected_year)
 # Tambahkan bagian kode Anda di sini
 st.header("Trene penggunaan sepeda")
 
-# Line chart for bike usage trend
-line_chart(filtered_data, 'month', 'count', f'Trene Penggunaan Sepeda Tahun {selected_year}', 'Bulan', 'Jumlah Sepeda')
 
 # Visualisasi Total Pengguna per Bulan
 hours_df['date'] = pd.to_datetime(hours_df['date'])
