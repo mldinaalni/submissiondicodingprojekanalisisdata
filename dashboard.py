@@ -51,9 +51,7 @@ selected_year = st.sidebar.selectbox('Pilih Tahun:', hours_df['year'].unique())
 filtered_data = filter_data_by_year(hours_df, selected_year)
 
 # Tambahkan bagian kode Anda di sini
-st.header("Trene penggunaan sepeda")
-
-
+st.header("Tren penggunaan sepeda per Bulan dan Tahun 2011-2012")
 # Visualisasi Total Pengguna per Bulan
 hours_df['date'] = pd.to_datetime(hours_df['date'])
 hours_df['month'] = hours_df['date'].dt.month
@@ -96,7 +94,7 @@ else:
 # Bar chart for seasonal pattern
 seasonal_pattern = filtered_data.groupby('season')['count'].mean()
 seasonal_pattern.index = ['Spring', 'Summer', 'Fall', 'Winter']
-bar_chart(seasonal_pattern, 'Pola Musiman dalam Penggunaan Sepeda', 'Musim', 'Jumlah Rata-rata Sepeda')
+bar_chart(seasonal_pattern, 'Penggunaan Sepeda per Bulan berdasarkan Musim', 'Musim', 'Jumlah Rata-rata Sepeda')
 
 
 # Penjelasan untuk tabel Pola Musiman dalam Penggunaan Sepeda
