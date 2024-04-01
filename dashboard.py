@@ -93,8 +93,25 @@ else:
 
 
 # Bar chart for seasonal pattern
+# Mengelompokkan data berdasarkan musim dan menghitung rata-rata jumlah peminjaman
 seasonal_pattern = filtered_data.groupby('season')['count'].mean()
-seasonal_pattern.index = ['Spring', 'Summer', 'Fall', 'Winter']
+
+# Mengubah nama index agar sesuai dengan gambar
+seasonal_pattern.index = ['Musim Semi', 'Musim Panas', 'Musim Gugur', 'Musim Dingin']
+
+# Membuat bar chart
+plt.figure(figsize=(10, 6))
+sns.barplot(x=seasonal_pattern.index, y=seasonal_pattern, palette=['#5467B2', '#FFC751', '#34A853', '#7570B3'])
+plt.title('Penggunaan Sepeda per Bulan berdasarkan Musim', fontsize=16)
+plt.xlabel('Musim', fontsize=14)
+plt.ylabel('Jumlah Rata-rata Sepeda', fontsize=14)
+plt.xticks(rotation=45)
+plt.yticks(np.arange(0, 300000, 50000))
+plt.grid(axis='y', linestyle='--', linewidth=0.5)
+
+# Menampilkan chart
+plt.show()
+
 bar_chart(seasonal_pattern, 'Penggunaan Sepeda per Bulan berdasarkan Musim', 'Musim', 'Jumlah Rata-rata Sepeda')
 
 
