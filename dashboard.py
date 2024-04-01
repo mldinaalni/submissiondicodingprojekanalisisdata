@@ -53,16 +53,6 @@ filtered_data = filter_data_by_year(hours_df, selected_year)
 # Tambahkan bagian kode Anda di sini
 st.header("Tren penggunaan sepeda per Bulan dan Tahun 2011-2012")
 
-# Title and header for the dashboard
-st.title("Total Peminjaman Sepeda per Bulan dan Musim")
-st.header("Data Analitik Peminjaman Sepeda")
-
-# Upload data from CSV file
-uploaded_file = st.file_uploader("Upload data CSV file", type="csv")
-
-if uploaded_file is not None:
-    # Read the data from the uploaded CSV file
-    df = pd.read_csv(uploaded_file)
 
     # Data manipulation (same as your previous code)
     df['date'] = pd.to_datetime(df['date'])
