@@ -52,6 +52,36 @@ filtered_data = filter_data_by_year(hours_df, selected_year)
 
 # Tambahkan bagian kode Anda di sini
 st.header("Tren penggunaan sepeda per Bulan dan Tahun 2011-2012")
+
+# Data preprocessing
+hours_df['date'] = pd.to_datetime(hours_df['date'])
+hours_df['month'] = hours_df['date'].dt.month
+hours_df['year'] = hours_df['date'].dt.year
+
+season_mapping = {1: 'Winter', 2: 'Winter', 3: 'Spring', 4: 'Spring', 5: 'Spring', 6: 'Summer', 7: 'Summer', 8: 'Summer', 9: 'Fall', 10: 'Fall', 11: 'Fall', 12: 'Winter'}
+hours_df['season'] = hours_df['month'].map(season_mapping)
+
+monthly_seasonal_count = hours_df.groupby(by=["month", "season"]).agg({"count": "sum"}).reset_index()
+
+# Dashboard layout
+app = dash.Dash(__name__)
+
+app.layout = html.Div([
+    html.H1("Total Peminjaman Sepeda per Bulan dan Musim"),
+    dcc.Graph(id='bike-rental-graph'),
+])
+
+@app.callback(
+    Output('bike-rental-graph', 'figure'),
+    [Input('season-dropdown', 'value')]
+)
+def update_graph(selected_season):
+    filtered_df = monthly_seasonal_count if selected_season == 'All' else monthly_seasonal_count[monthly_seasonal_count['season'] == selected_season]
+    fig = px.bar(filtered_df, x='month', y='count', color='season', title='Total Peminjaman Sepeda per Bulan dan Musim')
+    return fig
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
 # Visualisasi Total Pengguna per Bulan
 hours_df['date'] = pd.to_datetime(hours_df['date'])
 hours_df['month'] = hours_df['date'].dt.month
