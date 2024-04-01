@@ -53,32 +53,6 @@ filtered_data = filter_data_by_year(hours_df, selected_year)
 # Tambahkan bagian kode Anda di sini
 st.header("Tren penggunaan sepeda per Bulan dan Tahun 2011-2012")
 
-
-    # Data manipulation (same as your previous code)
-    df['date'] = pd.to_datetime(df['date'])
-    df['month'] = df['date'].dt.month
-    df['year'] = df['date'].dt.year
-
-    season_mapping = {1: 'Winter', 2: 'Winter', 3: 'Spring', 4: 'Spring', 5: 'Spring', 6: 'Summer', 7: 'Summer', 8: 'Summer', 9: 'Fall', 10: 'Fall', 11: 'Fall', 12: 'Winter'}
-    df['season'] = df['month'].map(season_mapping)
-
-    monthly_seasonal_count = df.groupby(by=["month", "season"]).agg({
-        "count": "sum"
-    }).sort_values(by=["month", "count"], ascending=[True, False])
-
-    # Visualization with Seaborn (same as your previous code)
-    fig, ax = plt.subplots(figsize=(12, 6))
-    sns.barplot(x=monthly_seasonal_count.index.get_level_values(0), y="count", hue=monthly_seasonal_count.index.get_level_values(1), data=monthly_seasonal_count.reset_index(), ax=ax)
-    plt.title('Total Peminjaman Sepeda per Bulan dan Musim')
-    plt.xlabel('Bulan')
-    plt.ylabel('Jumlah Peminjaman')
-
-    # Display the chart as a Streamlit image
-    st.image(fig)
-
-else:
-    st.info("Silakan upload file CSV Anda untuk melihat analitik peminjaman.")
-
 # Visualisasi Total Pengguna per Bulan
 hours_df['date'] = pd.to_datetime(hours_df['date'])
 hours_df['month'] = hours_df['date'].dt.month
